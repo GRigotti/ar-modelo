@@ -3,22 +3,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>AR Modelo</title>
+  <title>AR Modelos</title>
 
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
   <style>
-    /* Trava o fundo e impede qualquer rolagem da tela */
     html, body {
       margin: 0;
       padding: 0;
       width: 100vw;
-      height: 100dvh; /* dvh se adapta dinamicamente à tela do celular */
+      height: 100dvh;
       background-color: #222222;
       overflow: hidden; 
     }
 
-    /* Trava o visualizador exatamente nas bordas da tela */
     model-viewer {
       position: absolute;
       top: 0;
@@ -29,38 +27,69 @@
       display: block;
     }
 
-    /* Botão blindado contra o carregamento do modelo */
+    /* O menu agora está preparado para os seus 4 botões */
+    .menu-modelos {
+      position: absolute;
+      top: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      gap: 8px; /* Espaço um pouco menor para caber os 4 botões em telas pequenas */
+      z-index: 9999;
+      flex-wrap: wrap; /* Se a tela for muito fina, ele joga os botões para a linha de baixo automaticamente */
+      justify-content: center;
+      width: 90%;
+    }
+
+    .btn-trocar {
+      background-color: rgba(255, 255, 255, 0.8);
+      color: #333;
+      border: 2px solid #ffffff;
+      border-radius: 8px;
+      padding: 8px 12px;
+      font-size: 14px;
+      font-weight: bold;
+      cursor: pointer;
+      box-shadow: 0px 2px 5px rgba(0,0,0,0.3);
+      backdrop-filter: blur(4px);
+    }
+
+    .btn-trocar:active {
+      background-color: #ffffff;
+    }
+
     .botao-ar-customizado {
       background-color: #ffffff;
       color: #333333;
       border: none;
       border-radius: 8px;
-      
-      /* Posicionamento super fixo */
       position: absolute !important;
-      bottom: 40px !important; /* Espaço seguro do fundo */
+      bottom: 40px !important;
       left: 50% !important;
       transform: translateX(-50%) !important;
-      margin: 0 !important; /* Evita que margens do Google afetem o botão */
-      
+      margin: 0 !important;
       padding: 12px 24px;
       font-size: 16px;
       font-weight: bold;
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
       cursor: pointer;
       white-space: nowrap;
-      z-index: 9999 !important; /* Força a ficar na frente de tudo */
-    }
-
-    .botao-ar-customizado:active {
-      background-color: #e0e0e0;
+      z-index: 9999 !important;
     }
   </style>
 </head>
 
 <body>
 
+<div class="menu-modelos">
+  <button class="btn-trocar" onclick="mudarModelo('Teste.glb')">Padrão</button>
+  <button class="btn-trocar" onclick="mudarModelo('Testa_Lado.glb')">De Lado</button>
+  <button class="btn-trocar" onclick="mudarModelo('Testa_pe.glb')">Em Pé</button>
+  <button class="btn-trocar" onclick="mudarModelo('Testa_virada.glb')">Virada</button>
+</div>
+
 <model-viewer
+  id="meuViewer"
   src="Teste.glb"
   ar
   ar-modes="webxr scene-viewer quick-look"
@@ -72,6 +101,13 @@
   </button>
 
 </model-viewer>
+
+<script>
+  function mudarModelo(nomeDoArquivo) {
+    const visualizador = document.getElementById('meuViewer');
+    visualizador.src = nomeDoArquivo;
+  }
+</script>
 
 </body>
 </html>
