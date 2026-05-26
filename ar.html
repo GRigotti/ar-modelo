@@ -2,51 +2,54 @@
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
-  <!-- A tag viewport abaixo é crucial para responsividade no celular -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>AR Modelo</title>
 
   <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
 
   <style>
-    /* Resetando altura e margens para mobile */
+    /* Trava o fundo e impede qualquer rolagem da tela */
     html, body {
       margin: 0;
       padding: 0;
-      width: 100%;
-      height: 100%; /* Resolve o bug da barra do navegador engolir o botão */
+      width: 100vw;
+      height: 100dvh; /* dvh se adapta dinamicamente à tela do celular */
       background-color: #222222;
       overflow: hidden; 
     }
 
-    /* O viewer agora respeita o tamanho exato da tela visível */
+    /* Trava o visualizador exatamente nas bordas da tela */
     model-viewer {
-      width: 100%;
-      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100dvh;
       background-color: transparent;
       display: block;
     }
 
-    /* Botão centralizado e responsivo */
+    /* Botão blindado contra o carregamento do modelo */
     .botao-ar-customizado {
       background-color: #ffffff;
       color: #333333;
       border: none;
       border-radius: 8px;
       
-      /* Centralização na parte inferior */
-      position: absolute;
-      bottom: 30px; /* Distância segura do fundo da tela */
-      left: 50%;
-      transform: translateX(-50%); /* Puxa o botão de volta para o centro exato */
+      /* Posicionamento super fixo */
+      position: absolute !important;
+      bottom: 40px !important; /* Espaço seguro do fundo */
+      left: 50% !important;
+      transform: translateX(-50%) !important;
+      margin: 0 !important; /* Evita que margens do Google afetem o botão */
       
       padding: 12px 24px;
       font-size: 16px;
       font-weight: bold;
       box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
       cursor: pointer;
-      white-space: nowrap; /* Impede que o texto quebre em duas linhas em telas finas */
-      z-index: 100; /* Garante que nada fique por cima dele */
+      white-space: nowrap;
+      z-index: 9999 !important; /* Força a ficar na frente de tudo */
     }
 
     .botao-ar-customizado:active {
