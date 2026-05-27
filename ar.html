@@ -27,16 +27,15 @@
       display: block;
     }
 
-    /* O menu agora está preparado para os seus 4 botões */
     .menu-modelos {
       position: absolute;
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
       display: flex;
-      gap: 8px; /* Espaço um pouco menor para caber os 4 botões em telas pequenas */
+      gap: 8px; 
       z-index: 9999;
-      flex-wrap: wrap; /* Se a tela for muito fina, ele joga os botões para a linha de baixo automaticamente */
+      flex-wrap: wrap; 
       justify-content: center;
       width: 90%;
     }
@@ -83,14 +82,15 @@
 
 <div class="menu-modelos">
   <button class="btn-trocar" onclick="mudarModelo('Teste.glb')">Padrão</button>
-  <button class="btn-trocar" onclick="mudarModelo('Testa_Lado.glb')">De Lado</button>
-  <button class="btn-trocar" onclick="mudarModelo('Testa_pe.glb')">Em Pé</button>
-  <button class="btn-trocar" onclick="mudarModelo('Testa_virada.glb')">Virada</button>
+  <button class="btn-trocar" onclick="mudarModelo('Teste_Lado.glb')">De Lado</button>
+  <button class="btn-trocar" onclick="mudarModelo('Teste_pe.glb')">Em Pé</button>
+  <button class="btn-trocar" onclick="mudarModelo('Teste_virada.glb')">Virada</button>
 </div>
 
 <model-viewer
   id="meuViewer"
   src="Teste.glb"
+  ios-src="Teste.usdz"
   ar
   ar-modes="webxr scene-viewer quick-look"
   camera-controls
@@ -103,9 +103,17 @@
 </model-viewer>
 
 <script>
-  function mudarModelo(nomeDoArquivo) {
+  function mudarModelo(nomeDoArquivoGLB) {
     const visualizador = document.getElementById('meuViewer');
-    visualizador.src = nomeDoArquivo;
+    
+    // 1. Altera o modelo para Android/PC (.glb)
+    visualizador.src = nomeDoArquivoGLB;
+    
+    // 2. Substitui o texto ".glb" por ".usdz" automaticamente
+    const nomeDoArquivoUSDZ = nomeDoArquivoGLB.replace('.glb', '.usdz');
+    
+    // 3. Altera o modelo para iPhone (iOS) com a nova extensão
+    visualizador.setAttribute('ios-src', nomeDoArquivoUSDZ);
   }
 </script>
 
