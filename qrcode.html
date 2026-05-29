@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>AR no QR Code</title>
+  
+  <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+  <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
+</head>
+
+<body style="margin: 0px; overflow: hidden;">
+
+  <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
+    
+    <a-assets>
+      <a-asset-item id="meu-modelo" src="Teste.glb"></a-asset-item>
+    </a-assets>
+
+    <a-marker preset="hiro">
+      
+      <a-entity 
+        gltf-model="#meu-modelo" 
+        scale="1 1 1" 
+        position="0 0 0" 
+        rotation="-90 0 0">
+      </a-entity>
+
+    </a-marker>
+
+    <a-entity camera></a-entity>
+
+  </a-scene>
+
+</body>
+</html>
