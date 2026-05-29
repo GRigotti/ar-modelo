@@ -9,11 +9,7 @@
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 
   <style>
-    /* Remove as margens para a câmera ocupar a tela toda e esconde barras de rolagem */
-    body {
-      margin: 0;
-      overflow: hidden;
-    }
+    body { margin: 0; overflow: hidden; }
   </style>
 </head>
 
@@ -25,31 +21,13 @@
       <a-asset-item id="meu-modelo" src="Teste.glb"></a-asset-item>
     </a-assets>
 
-   
-    <!--a-marker type="pattern" url="meu-marcador.patt"-->
-      
-      <a-entity 
-        gltf-model="#meu-modelo" 
-        scale="1 1 1" 
-        position="0 0 0" 
-        rotation="-90 0 0">
-      </a-entity>
-
-   <!a-marker 
-      type="pattern" 
-      url="meu-marcador.patt"
-      smooth="true"
-      smoothCount="10"
-      smoothTolerance="0.01"
-      smoothThreshold="5"-->
-
-     <a-marker 
+    <a-marker 
         preset="hiro" 
         smooth="true" 
         smoothCount="10" 
         smoothTolerance="0.01" 
         smoothThreshold="5">
-       
+        
       <a-entity 
         gltf-model="#meu-modelo" 
         scale="1 1 1" 
