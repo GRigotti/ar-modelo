@@ -3,84 +3,32 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>AR no Marcador</title>
+  <title>AR Modelo 3D</title>
 
   <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
   <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
 
   <style>
-    /* Interface limpa por cima da câmera */
+    /* Remove as margens para a câmera ocupar a tela toda e esconde barras de rolagem */
     body {
       margin: 0;
       overflow: hidden;
-      font-family: sans-serif;
-    }
-
-    /* Menu de Botões (funciona perfeitamente por cima da câmera nesta versão) */
-    .menu-modelos {
-      position: absolute;
-      top: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      display: flex;
-      gap: 8px;
-      z-index: 9999;
-      flex-wrap: wrap;
-      justify-content: center;
-      width: 90%;
-    }
-
-    .btn-trocar {
-      background-color: rgba(255, 255, 255, 0.9);
-      color: #333;
-      border: 2px solid #ffffff;
-      border-radius: 8px;
-      padding: 10px 14px;
-      font-size: 14px;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0px 4px 6px rgba(0,0,0,0.3);
-    }
-
-    .btn-trocar:active {
-      background-color: #dddddd;
-    }
-    
-    /* Aviso na tela para a pessoa saber o que fazer */
-    .aviso {
-      position: absolute;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: rgba(0, 0, 0, 0.6);
-      color: white;
-      padding: 10px 20px;
-      border-radius: 20px;
-      font-size: 14px;
-      z-index: 9999;
-      white-space: nowrap;
     }
   </style>
 </head>
 
 <body>
 
-  <div class="menu-modelos">
-    <button class="btn-trocar" onclick="mudarModelo('Teste.glb')">Padrão</button>
-    <button class="btn-trocar" onclick="mudarModelo('Teste_Lado.glb')">De Lado</button>
-    <button class="btn-trocar" onclick="mudarModelo('Teste_pe.glb')">Em Pé</button>
-    <button class="btn-trocar" onclick="mudarModelo('Teste_virada.glb')">Virada</button>
-  </div>
-
-  <div class="aviso">Aponte a câmera para o Marcador Hiro</div>
-
   <a-scene embedded arjs="sourceType: webcam; debugUIEnabled: false;">
     
-    <a-marker preset="hiro">
+    <a-assets>
+      <a-asset-item id="meu-modelo" src="Teste.glb"></a-asset-item>
+    </a-assets>
+
+    <a-marker type="pattern" url="meu-marcador.patt">
       
       <a-entity 
-        id="meu-modelo-3d"
-        gltf-model="Teste.glb" 
+        gltf-model="#meu-modelo" 
         scale="1 1 1" 
         position="0 0 0" 
         rotation="-90 0 0">
@@ -91,36 +39,6 @@
     <a-entity camera></a-entity>
 
   </a-scene>
-
-  <script>
-    function mudarModelo(nomeDoArquivo) {
-      const modeloEntity = document.getElementById('meu-modelo-3d');
-      // No A-Frame, alteramos o atributo gltf-model
-      modeloEntity.setAttribute('gltf-model', nomeDoArquivo);
-    }
-  </script>
-
-</body>
-</html>
-    📸 Ver no meu espaço
-  </button>
-
-</model-viewer>
-
-<script>
-  function mudarModelo(nomeDoArquivoGLB) {
-    const visualizador = document.getElementById('meuViewer');
-    
-    // 1. Altera o modelo para Android/PC (.glb)
-    visualizador.src = nomeDoArquivoGLB;
-    
-    // 2. Substitui o texto ".glb" por ".usdz" automaticamente
-    const nomeDoArquivoUSDZ = nomeDoArquivoGLB.replace('.glb', '.usdz');
-    
-    // 3. Altera o modelo para iPhone (iOS) com a nova extensão
-    visualizador.setAttribute('ios-src', nomeDoArquivoUSDZ);
-  }
-</script>
 
 </body>
 </html>
