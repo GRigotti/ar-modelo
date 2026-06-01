@@ -21,11 +21,13 @@
     </a-assets>
 
     <a-marker 
-        preset="hiro"
-        smooth="true" 
-        smoothCount="10" 
-        smoothTolerance="0.01" 
-        smoothThreshold="5">
+        <a-marker 
+      type="pattern" 
+      url="meu-marcador.patt"
+      smooth="true" 
+      smoothCount="10" 
+      smoothTolerance="0.01" 
+      smoothThreshold="5">
         
         <a-entity 
             gltf-model="#meu-modelo" 
